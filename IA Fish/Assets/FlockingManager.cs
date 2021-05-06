@@ -12,13 +12,19 @@ public class FlockingManager : MonoBehaviour
     public GameObject[] allfish;
     //variavel que determinar o tamanho minimo e maximo da onde os peixes vão nascer
     public Vector3 swinLimits = new Vector3(5, 5, 5);
+    //identifica o posicionamento do manager
+    public Vector3 goalPos;
 
-    //variaveis com slider que determinam a velocidade minima e maxima que os peixes vão se locomover
+    //variaveis com slider que determinam a velocidade minima e maxima que os peixes vão se locomover, e a distancia entre eles
     [Header("Configurações do Cardume")]
     [Range(0.0f, 5.0f)]
     public float minSpeed;
     [Range(0.0f, 5.0f)]
     public float maxSpeed;
+    [Range(1.0f, 10.0f)]
+    public float neighbourDistance;
+    [Range(0.0f, 5.0f)]
+    public float rotationSpeed;
     void Start()
     {
         // declaração que referencia o numero de peixes instanciados ao peixes que foram guardos no array
@@ -33,5 +39,16 @@ public class FlockingManager : MonoBehaviour
             //em cada peixe, ele pega seu script de flock e declara como dele.
             allfish[i].GetComponent<Flock>().myManager = this;
         }
+        //indica aonde esta situado o manager do flocking
+        goalPos = this.transform.position;
+    }
+
+    private void Update()
+    {
+        //seta a objetivo
+        goalPos= this.transform.position;
+        if(Random.Range(0,100)<10)goalPos = this.transform.position + new Vector3(Random.Range(-swinLimits.x, swinLimits.x),
+                                                                                  Random.Range(-swinLimits.y, swinLimits.y),
+                                                                                  Random.Range(-swinLimits.z, swinLimits.z));
     }
 }

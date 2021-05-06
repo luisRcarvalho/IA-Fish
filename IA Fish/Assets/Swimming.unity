@@ -246,8 +246,11 @@ MonoBehaviour:
   numFish: 20
   allfish: []
   swinLimits: {x: 5, y: 5, z: 5}
+  goalPos: {x: 0, y: 0, z: 0}
   minSpeed: 4.04
   maxSpeed: 4.04
+  neighbourDistance: 1.84
+  rotationSpeed: 0
 --- !u!4 &994635994
 Transform:
   m_ObjectHideFlags: 0
